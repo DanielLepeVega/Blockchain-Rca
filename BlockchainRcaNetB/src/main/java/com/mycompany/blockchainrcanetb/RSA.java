@@ -13,69 +13,84 @@ import java.util.*;
  */
 public class RSA {
     
+    // User parameter
+    int BIT_LENGTH = 2048;
+
+    // Generate random primes
+    Random rand = new SecureRandom();
+    BigInteger p = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
+    BigInteger q = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
+
+    // Calculate products
+    BigInteger n = p.multiply(q);
+    BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+    BigInteger e;
+    BigInteger d;
+    
     public RSA(){
-        // User parameter
-        int BIT_LENGTH = 2048;
-
-        // Generate random primes
-        Random rand = new SecureRandom();
-        BigInteger p = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
-        BigInteger q = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
-
-        // Calculate products
-        BigInteger n = p.multiply(q);
-        BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
 
         // Generate public and private exponents
-        BigInteger e;
-        do e = new BigInteger(phi.bitLength(), rand);
-        while (e.compareTo(BigInteger.ONE) <= 0 || e.compareTo(phi) >= 0 || !e.gcd(phi).equals(BigInteger.ONE));
-        BigInteger d = e.modInverse(phi);
+        
+        do this.e = new BigInteger(this.phi.bitLength(), rand);
+        while (this.e.compareTo(BigInteger.ONE) <= 0 || this.e.compareTo(this.phi) >= 0 || !this.e.gcd(this.phi).equals(BigInteger.ONE));
+        this.d = this.e.modInverse(this.phi);
 
         // Message encryption
-        BigInteger mssg = BigInteger.valueOf(5);
-        BigInteger msg = (mssg);  // Any integer in the range [0, n)
-        BigInteger enc = msg.modPow(e, n);
+        //BigInteger mssg = BigInteger.valueOf(5);
+        //BigInteger msg = (mssg);  // Any integer in the range [0, n)
+        //BigInteger enc = msg.modPow(e, n);
 
         // Message decryption
-        BigInteger dec = enc.modPow(d, n);
+        //BigInteger dec = enc.modPow(d, n);
     }
     
-    public BigInteger stringToBigInt(String msg){
-        BigInteger result;
+    public BigInteger encryptMsg(BigInteger msg){
+        return msg.modPow(this.e, this.n);
+    }
+    
+    public BigInteger desencryptMsg(BigInteger enc){
+        return enc.modPow(this.e, this.n);
+    }
+    
+    public ArrayList<BigInteger> stringToBigInt(String msg){
         ArrayList<Character> word = new ArrayList<Character>();
+        ArrayList<BigInteger> bigIntToCipher = new ArrayList<BigInteger>();
         for(int i=0;i<msg.length();i++){
             word.add(msg.charAt(i));
         }
-        HashMap<Character, Integer> cifradoLepe = new HashMap<>();
-        cifradoLepe.put('A', 0);
-        cifradoLepe.put('B', 1);
-        cifradoLepe.put('C', 2);
-        cifradoLepe.put('D', 3);
-        cifradoLepe.put('E', 4);
-        cifradoLepe.put('F', 5);
-        cifradoLepe.put('G', 6);
-        cifradoLepe.put('H', 7);
-        cifradoLepe.put('I', 8);
-        cifradoLepe.put('J', 9);
-        cifradoLepe.put('K', 10);
-        cifradoLepe.put('L', 11);
-        cifradoLepe.put('M', 12);
-        cifradoLepe.put('N', 13);
-        cifradoLepe.put('Ñ', 14);
-        cifradoLepe.put('O', 15);
-        cifradoLepe.put('P', 16);
-        cifradoLepe.put('Q', 17);
-        cifradoLepe.put('R', 18);
-        cifradoLepe.put('S', 19);
-        cifradoLepe.put('T', 20);
-        cifradoLepe.put('U', 21);
-        cifradoLepe.put('V', 22);
-        cifradoLepe.put('W', 23);
-        cifradoLepe.put('X', 24);
-        cifradoLepe.put('Y', 25);
-        cifradoLepe.put('Z', 26);
+        HashMap<Character, Integer> cipherLepe = new HashMap<>();
+        cipherLepe.put('A', 0);
+        cipherLepe.put('B', 1);
+        cipherLepe.put('C', 2);
+        cipherLepe.put('D', 3);
+        cipherLepe.put('E', 4);
+        cipherLepe.put('F', 5);
+        cipherLepe.put('G', 6);
+        cipherLepe.put('H', 7);
+        cipherLepe.put('I', 8);
+        cipherLepe.put('J', 9);
+        cipherLepe.put('K', 10);
+        cipherLepe.put('L', 11);
+        cipherLepe.put('M', 12);
+        cipherLepe.put('N', 13);
+        cipherLepe.put('Ñ', 14);
+        cipherLepe.put('O', 15);
+        cipherLepe.put('P', 16);
+        cipherLepe.put('Q', 17);
+        cipherLepe.put('R', 18);
+        cipherLepe.put('S', 19);
+        cipherLepe.put('T', 20);
+        cipherLepe.put('U', 21);
+        cipherLepe.put('V', 22);
+        cipherLepe.put('W', 23);
+        cipherLepe.put('X', 24);
+        cipherLepe.put('Y', 25);
+        cipherLepe.put('Z', 26);
         
-        return result;
+        for(int i=0;i<word.size();i++){
+            bigIntToCipher.add(BigInteger.valueOf(cipherLepe.get(word.get(i))));
+        }
+        
+        return bigIntToCipher;
     }
 }
