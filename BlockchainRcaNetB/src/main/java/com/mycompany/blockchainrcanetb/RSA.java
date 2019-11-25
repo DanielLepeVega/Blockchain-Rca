@@ -49,7 +49,7 @@ public class RSA {
     }
     
     public BigInteger desencryptMsg(BigInteger enc){
-        return enc.modPow(this.e, this.n);
+        return enc.modPow(this.d, this.n);
     }
     
     public ArrayList<BigInteger> stringToBigInt(String msg){
