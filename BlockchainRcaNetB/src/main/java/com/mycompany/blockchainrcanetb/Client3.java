@@ -153,25 +153,27 @@ public class Client3 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         RSA rsa = new RSA();
-        rsa.readFile("salida.txt");
+        StringInt result = rsa.readFile("salida.txt");
+        jTextField1.setText(result.getMsg());
+        jTextField2.setText("" + result.getQuantity());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        //this.goToClient2();
-        Client2 client2 = new Client2();
+        this.goToClient2();
+        /*Client2 client2 = new Client2();
         System.out.println("--1");
         client2.pack();
         System.out.println("--2");
         client2.setLocationRelativeTo(null);
         System.out.println("--3");
         client2.setVisible(true);
-        System.out.println("--4");
+        System.out.println("--4");*/
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public void goToClient2(){
-        Client2 client2 = new Client2();
+        Client1 client2 = new Client1();
         client2.pack();
         client2.setLocationRelativeTo(null);
         client2.setVisible(true);

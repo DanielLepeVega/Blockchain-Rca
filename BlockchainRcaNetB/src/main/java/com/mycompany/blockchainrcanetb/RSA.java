@@ -252,16 +252,17 @@ public class RSA {
         }
     }
 
-    public void readFile(String fileName) {
+    public StringInt readFile(String fileName) {
         ArrayList<BigInteger> msgToDesencrypt = new ArrayList<BigInteger>();
         ArrayList<BigInteger> quantityToDesencrypt = new ArrayList<BigInteger>();
+        StringInt result = new StringInt();
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line;
             line = br.readLine();
             while (line != null) {
                 //System.out.println("-------------------------");
-                System.out.println(line);
+                //System.out.println(line);
                 BigInteger word = new BigInteger(line);
                 msgToDesencrypt.add(word);
 
@@ -269,7 +270,7 @@ public class RSA {
                 line = br.readLine();
                 if (line.equals("---")) {
                     //System.out.println("------------********-------------");
-                    System.out.println(line);
+                    //System.out.println(line);
                     line = br.readLine();
                     //line = br.readLine();
                     //System.out.println(line);
@@ -287,16 +288,19 @@ public class RSA {
             br.close();
             ArrayList<String> msgDesciphered = descipherMsg(msgToDesencrypt);
             int intDesciphered = descipherInt(quantityToDesencrypt);
-            System.out.print("Message: ");
+            //System.out.print("Message: ");
             for (int i = 0; i < msgDesciphered.size(); i++) {
-                System.out.print(msgDesciphered.get(i));
+                //System.out.print(msgDesciphered.get(i));
+                result.addMsg(msgDesciphered.get(i));
             }
             System.out.println();
-            System.out.println("Quantity: " + intDesciphered);
+            //System.out.println("Quantity: " + intDesciphered);
+            result.setInt(intDesciphered);
         } catch (FileNotFoundException e) {
             System.out.println("File not found " + e);
         } catch (IOException e) {
             System.out.println("File couldn't be read " + e);
         }
+        return result;
     }
 }
