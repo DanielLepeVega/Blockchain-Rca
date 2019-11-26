@@ -5,6 +5,7 @@
  */
 package com.mycompany.blockchainrcanetb;
 import javax.swing.*;
+import com.mycompany.blockchainrcanetb.*;
 
 /**
  *
