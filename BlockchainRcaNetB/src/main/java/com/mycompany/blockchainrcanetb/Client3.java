@@ -11,13 +11,13 @@ import com.mycompany.blockchainrcanetb.*;
  *
  * @author yo_da
  */
-public class Client1 extends javax.swing.JFrame {
+public class Client3 extends javax.swing.JFrame {
 
     /**
      * Creates new form Client1
      */
     
-    public Client1() {
+    public Client3() {
         initComponents();
     }
 
@@ -42,7 +42,7 @@ public class Client1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setText("Client 1");
+        jLabel1.setText("Client 2");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("Message");
@@ -81,7 +81,7 @@ public class Client1 extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton4.setText("Client 2");
+        jButton4.setText("Client 1");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -159,7 +159,7 @@ public class Client1 extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         //this.goToClient2();
-        Client3 client2 = new Client3();
+        Client2 client2 = new Client2();
         System.out.println("--1");
         client2.pack();
         System.out.println("--2");
@@ -170,8 +170,8 @@ public class Client1 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void goToClient3(){
-        Client3 client2 = new Client3();
+    public void goToClient2(){
+        Client2 client2 = new Client2();
         client2.pack();
         client2.setLocationRelativeTo(null);
         client2.setVisible(true);
@@ -194,20 +194,21 @@ public class Client1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Client1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Client1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Client1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Client1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Client1().setVisible(true);
+                new Client3().setVisible(true);
             }
         });
         
