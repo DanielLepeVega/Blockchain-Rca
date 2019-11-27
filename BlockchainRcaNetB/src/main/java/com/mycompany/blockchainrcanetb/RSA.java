@@ -29,9 +29,9 @@ public class RSA {
 
     // Calculate products
     public BigInteger n = p.multiply(q);
-    public BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
-    public BigInteger e;
-    public BigInteger d;
+    private final BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+    private BigInteger e;
+    private BigInteger d;
 
     public RSA() {
 
