@@ -6,6 +6,8 @@
 package com.mycompany.blockchainrcanetb;
 import javax.swing.*;
 import com.mycompany.blockchainrcanetb.*;
+import static com.mycompany.blockchainrcanetb.Client3.jTextField1;
+import static com.mycompany.blockchainrcanetb.Client3.jTextField2;
 
 /**
  *
@@ -160,12 +162,15 @@ public class Client1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         RSA rsa = new RSA();
         rsa.writeFile(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+        //rsa.writeFileWorldLedger(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         RSA rsa = new RSA();
-        rsa.readFile("salida.txt");
+        StringInt result = rsa.readFile("Transaction.txt");
+        jTextField1.setText(result.getMsg());
+        jTextField2.setText("" + result.getQuantity());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

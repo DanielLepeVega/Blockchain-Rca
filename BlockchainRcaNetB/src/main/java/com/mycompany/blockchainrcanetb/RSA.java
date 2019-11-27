@@ -18,6 +18,7 @@ public class RSA {
 
     // User parameter
     public int BIT_LENGTH = 512;
+    public int transaction = 1;
 
     // Generate random primes
     public Random rand = new SecureRandom();
@@ -230,7 +231,42 @@ public class RSA {
         ArrayList<BigInteger> msgToEncrypt = this.cipherMsg(msg);
         ArrayList<BigInteger> quantityToEncrypt = this.cipherInt(quantity);
         try {
-            PrintWriter pw = new PrintWriter(new FileWriter("salida.txt"));
+            PrintWriter pw = new PrintWriter(new FileWriter("Transaction.txt"));
+            //pw.println("");
+            for (int i = 0; i < msgToEncrypt.size(); i++) {
+                pw.println(msgToEncrypt.get(i));
+            }
+            //pw.println();
+            pw.println("---");
+            //pw.println();
+            for (int i = 0; i < quantityToEncrypt.size(); i++) {
+                pw.print(quantityToEncrypt.get(i));
+            }
+            pw.println();
+            pw.println("---");
+            pw.println(this.n);
+            pw.println("---");
+            pw.println(this.d);
+            pw.close();
+        } catch (IOException e) {
+            System.out.println("Error " + e);
+        }
+    }
+    
+    public void writeFileWorldLedger(String msg, int quantity) {
+        ArrayList<BigInteger> msgToEncrypt = this.cipherMsg(msg);
+        ArrayList<BigInteger> quantityToEncrypt = this.cipherInt(quantity);
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("WorldLedger.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("Transaction.txt"));
+            //pw.println("File " + this.transaction + ": ");
+            //this.transaction++;
+            String line;
+            line = br.readLine();
+            while (line != null){
+                pw.println(line);
+                br.readLine();
+            }
             //pw.println("");
             for (int i = 0; i < msgToEncrypt.size(); i++) {
                 pw.println(msgToEncrypt.get(i));
@@ -258,6 +294,11 @@ public class RSA {
         StringInt result = new StringInt();
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
+            BufferedReader br1 = new BufferedReader(new FileReader("Transaction.txt"));
+            PrintWriter pw1 = new PrintWriter(new FileWriter("Temp.txt"));
+            //PrintWriter pw2 = new PrintWriter(new FileWriter("Temp.txt"));
+            //pw1.println("File " + this.transaction + ": ");
+            
             String line;
             line = br.readLine();
             while (line != null) {
@@ -265,7 +306,6 @@ public class RSA {
                 //System.out.println(line);
                 BigInteger word = new BigInteger(line);
                 msgToDesencrypt.add(word);
-
                 //System.out.println("-------------------------");
                 line = br.readLine();
                 if (line.equals("---")) {
@@ -279,9 +319,11 @@ public class RSA {
                     line = br.readLine();
                     line = br.readLine();
                     this.setN(line);
+                    //pw1.println(line);
                     line = br.readLine();
                     line = br.readLine();
                     this.setD(line);
+                    //pw1.println(line);
                     break;
                 }
             }
@@ -293,14 +335,49 @@ public class RSA {
                 //System.out.print(msgDesciphered.get(i));
                 result.addMsg(msgDesciphered.get(i));
             }
+            //pw1.println(result.getMsg());
             System.out.println();
             //System.out.println("Quantity: " + intDesciphered);
             result.setInt(intDesciphered);
+            //pw1.println("" + result.getQuantity());
+            //pw1.close();
+            //-------------------------------------------------
+            /*String line1;
+            line1 = br1.readLine();
+            while(line1 != null){
+                pw1.println(line1);
+                //pw2.println(line1);
+                line1 = br1.readLine();
+                /*pw1.println(line1);
+                line1 = br1.readLine();
+                pw1.println(line1);
+                line1 = br1.readLine();
+                pw1.println(line1);
+                line1 = br1.readLine();
+            }*/
+            pw1.println(result.getMsg());
+            pw1.println("" + result.getQuantity());
+            //pw2.println(result.getMsg());
+            //pw2.println("" + result.getQuantity());
+            
+            pw1.close();
+            //pw2.close();
+            br1.close();
+            br1 = new BufferedReader(new FileReader("Temp.txt"));
+            pw1 = new PrintWriter(new FileWriter("WorldLedger.txt",true));
+            
+            while((line = br1.readLine())!=null){
+                pw1.println(line);
+                
+            }
+            br1.close();
+            pw1.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found " + e);
         } catch (IOException e) {
             System.out.println("File couldn't be read " + e);
         }
+        this.transaction++;
         return result;
     }
 }
